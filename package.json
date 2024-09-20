@@ -13,6 +13,7 @@
     "axios": "^1.7.7",
     "pinia": "^2.2.2",
     "postcss": "^8.4.47",
+    "swiper": "^11.1.14",
     "tailwindcss": "^3.4.12",
     "vite-svg-loader": "^5.1.0",
     "vue": "^3.4.37",
