@@ -6,6 +6,9 @@
             class="w-full h-[307px] border border-green-500 flex justify-center items-center relative"
         >
             <p class="text-black text-2xl">Image Goes Here</p>
+            <div class="w-auto h-auto absolute left-3 top-3">
+                <Tag title="იყიდება" />
+            </div>
         </div>
         <div class="w-full flex-grow p-6 space-y-5">
             <div
@@ -36,6 +39,8 @@
         </div>
     </div>
 </template>
+
 <script setup>
 import Icon from '@/components/Icon.vue'
+import Tag from '@/components/Tag.vue'
 </script>
