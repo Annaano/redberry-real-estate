@@ -1,3 +1,6 @@
 <template>
-  <p class="text-red-500 text-2xl">Index</p>
+  <Header />
 </template>
+<script setup>
+import Header from '@/components/Header.vue'
+</script>
