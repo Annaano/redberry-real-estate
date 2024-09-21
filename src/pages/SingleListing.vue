@@ -73,6 +73,7 @@
                 </div>
                 <div class="w-auto h-auto mt-8">
                     <Button
+                        @click="deleteListing"
                         title="ლისტინგის წაშლა"
                         type="outline"
                         color="gray"
@@ -92,7 +93,11 @@
     >
         <p class="text-black font-bold text-3xl">ბინები მსგავს ლოკაციაზე</p>
     </div>
+    <div class="w-full h-auto flex justify-center items-center">
+        <p class="text-black text-sm">ბინები მსგავს ლოკაციაზე ვერ მოიძებნა</p>
+    </div>
     <div
+        v-if="sameLocationApartments.length > 0"
         class="w-full h-[455px] px-40 flex justify-center items-center relative"
     >
         <CardSlider :apartments="sameLocationApartments" />
@@ -133,6 +138,13 @@ const getSameLocationApartments = async () => {
             ap.city_id === apartment.value.city_id &&
             ap.id !== apartment.value.id
     )
+}
+
+const deleteListing = async () => {
+    const result = await axios.delete(`/real-estates/${route.params.id}`)
+    if (result.status == 200) {
+        router.push('/')
+    }
 }
 
 onMounted(async () => {
