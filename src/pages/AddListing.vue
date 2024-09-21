@@ -296,7 +296,7 @@
             <div
                 class="mt-10 w-full flex justify-end items-center h-auto space-x-4"
             >
-                <Button title="გაუქმება" type="outline" />
+                <Button @click="router.push('/')" title="გაუქმება" type="outline" />
                 <Button
                     :disabled="submitDisabled"
                     @click="submit"
@@ -314,8 +314,10 @@ import Icon from '@/components/Icon.vue'
 import useApartmentStore from '@/store/apartment.js'
 import axios from '@/plugins/axios'
 import { computed, onMounted, reactive, ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
 
 const apartmentStore = useApartmentStore()
+const router=useRouter()
 
 const regions = ref([])
 const cities = ref([])
