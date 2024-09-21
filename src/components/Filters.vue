@@ -23,7 +23,10 @@
                     ]"
                 />
             </div>
-            <RegionFilterDropdown :isOpen="regionDropdown" />
+            <RegionFilterDropdown
+                @selection="filterWithRegion"
+                :isOpen="regionDropdown"
+            />
         </div>
         <div
             :class="[
@@ -89,6 +92,7 @@
                     ]"
                 />
             </div>
+
             <BedroomFilterDropdown :is-open="bedroomsDropdown" />
         </div>
     </div>
@@ -100,28 +104,40 @@ import PriceFilterDropdown from '@/components/PriceFilterDropdown.vue'
 import RegionFilterDropdown from '@/components/RegionFilterDropdown.vue'
 import AreaFilterDropDown from '@/components/AreaFilterDropDown.vue'
 import BedroomFilterDropdown from '@/components/BedroomFilterDropdown.vue'
+
+const emits = defineEmits(['filter'])
+
 const regionDropdown = ref(false)
 const priceDropdown = ref(false)
 const areaDropdown = ref(false)
 const bedroomsDropdown = ref(false)
+
+const filterWithRegion = (regions) => {
+    emits('filter', { data: regions, type: 'region' })
+    regionDropdown.value = false
+}
+
 const toggleRegionDropDown = () => {
     regionDropdown.value = !regionDropdown.value
     priceDropdown.value = false
     areaDropdown.value = false
     bedroomsDropdown.value = false
 }
+
 const togglePriceDropDown = () => {
     regionDropdown.value = false
     priceDropdown.value = !priceDropdown.value
     areaDropdown.value = false
     bedroomsDropdown.value = false
 }
+
 const toggleAreaDropDown = () => {
     regionDropdown.value = false
     priceDropdown.value = false
     areaDropdown.value = !areaDropdown.value
     bedroomsDropdown.value = false
 }
+
 const toggleBedroomsDropDown = () => {
     regionDropdown.value = false
     priceDropdown.value = false

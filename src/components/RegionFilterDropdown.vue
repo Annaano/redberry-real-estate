@@ -8,25 +8,49 @@
         <p class="font-medium">რეგიონის მიხედვით</p>
         <div class="w-full h-auto grid grid-cols-3 gap-4 py-4">
             <span
-                v-for="n in 12"
-                :key="n"
+                v-for="region in regions"
+                :key="region.id"
                 class="col-span-1 flex justify-start items-center space-x-3"
             >
-                <input type="checkbox" name="region" />
-                <p class="text-sm text-black">ქართლი</p>
+                <input
+                    type="checkbox"
+                    :value="region.id"
+                    :name="`region-${region.id}`"
+                    :id="`region-${region.id}`"
+                    v-model="checkedRegions"
+                />
+                <label
+                    :for="`region-${region.id}`"
+                    class="text-sm text-black"
+                    >{{ region?.name }}</label
+                >
             </span>
         </div>
         <div class="w-full mt-4 flex justify-end items-center">
-            <Button title="არჩევა" @click="console.log('hee')" />
+            <Button title="არჩევა" @click="emit('selection', checkedRegions)" />
         </div>
     </div>
 </template>
+
 <script setup>
 import Button from '@/components/Button.vue'
+import axios from '@/plugins/axios'
+import { onMounted, ref } from 'vue'
+
+const emit = defineEmits(['selection'])
+
+const regions = ref([])
+const checkedRegions = ref([])
+
 defineProps({
     isOpen: {
         type: Boolean,
         required: true,
     },
+})
+
+onMounted(async () => {
+    const data = await axios.get('/regions')
+    regions.value = data.data
 })
 </script>
