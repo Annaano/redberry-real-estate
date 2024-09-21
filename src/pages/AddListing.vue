@@ -38,6 +38,7 @@
                     >
                         <p class="text-sm text-black">მისამართი *</p>
                         <input
+                            v-model="apartmentStore.address"
                             type="text"
                             class="w-full h-10 rounded-xl border border-black px-2 text-sm"
                         />
@@ -48,6 +49,7 @@
                     >
                         <p class="text-sm text-black">საფოსტო ინდექსი *</p>
                         <input
+                            v-model="apartmentStore.zip_code"
                             type="text"
                             class="w-full h-10 rounded-xl border border-black px-2 text-sm"
                         />
@@ -62,6 +64,7 @@
                     >
                         <p class="text-sm text-black">რეგიონი *</p>
                         <select
+                            v-model="apartmentStore.region_id"
                             name=""
                             id=""
                             class="w-full h-10 rounded-xl border border-black px-2"
@@ -76,6 +79,7 @@
                     >
                         <p class="text-sm text-black">ქალაქი *</p>
                         <select
+                            v-model="apartmentStore.city_id"
                             name=""
                             id=""
                             class="w-full h-10 rounded-xl border border-black px-2"
@@ -99,6 +103,7 @@
                     >
                         <p class="text-sm text-black">ფასი *</p>
                         <input
+                            v-model="apartmentStore.price"
                             type="text"
                             class="w-full h-10 rounded-xl border border-black px-2 text-sm"
                         />
@@ -109,6 +114,7 @@
                     >
                         <p class="text-sm text-black">ფართობი *</p>
                         <input
+                            v-model="apartmentStore.area"
                             type="text"
                             class="w-full h-10 rounded-xl border border-black px-2 text-sm"
                         />
@@ -125,6 +131,7 @@
                             საძინებლების რაოდენობა *
                         </p>
                         <input
+                            v-model="apartmentStore.bedrooms"
                             type="text"
                             class="w-full h-10 rounded-xl border border-black px-2 text-sm"
                         />
@@ -136,6 +143,7 @@
                 >
                     <p class="text-black">აღწერა *</p>
                     <textarea
+                        v-model="apartmentStore.description"
                         class="w-full h-[135px] border border-black rounded-xl"
                     ></textarea>
                     <p class="text-sm text-black">მინიმუმ 5 სიტყვა</p>
@@ -164,6 +172,7 @@
                         >
                             <p class="text-sm text-black">აირჩიეთ *</p>
                             <select
+                                v-model="apartmentStore.agent_id"
                                 name=""
                                 id=""
                                 class="w-full h-10 rounded-xl border border-black px-2"
@@ -179,7 +188,10 @@
         </div>
     </div>
 </template>
+
 <script setup>
 import Header from '@/components/Header.vue'
 import Icon from '@/components/Icon.vue'
+import useApartmentStore from '@/store/apartment.js'
+const apartmentStore = useApartmentStore()
 </script>
