@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Index from '@/pages/Index.vue'
 import SingleListing from '@/pages/SingleListing.vue'
+import AddListing from '@/pages/AddListing.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -11,7 +12,10 @@ const router = createRouter({
             name: 'single-listing',
             component: SingleListing,
         },
+        {
+            path: '/add-listing',
+            name: 'add-listing',
+            component: AddListing,
+        },
     ],
 })
-
-export default router
