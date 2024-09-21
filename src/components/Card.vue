@@ -12,7 +12,7 @@
                 class="w-full h-full object-cover object-center"
             />
             <div class="w-auto h-auto absolute left-3 top-3">
-                <Tag title="იყიდება" />
+                <Tag :title="apartment?.is_rental ? 'ქირავდება' : 'იყიდება'" />
             </div>
         </div>
         <div class="w-full flex-grow p-6 space-y-5">
