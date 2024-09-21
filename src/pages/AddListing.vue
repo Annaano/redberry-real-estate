@@ -52,7 +52,16 @@
                             type="text"
                             class="w-full h-10 rounded-xl border border-black px-2 text-sm"
                         />
-                        <p class="text-black text-sm">მინიმუმ 2 სიმბოლო</p>
+                        <p
+                            :class="[
+                                ' text-sm',
+                                formErrors.address
+                                    ? 'text-red-500'
+                                    : 'text-black',
+                            ]"
+                        >
+                            მინიმუმ 2 სიმბოლო
+                        </p>
                     </div>
                     <div
                         class="w-1/2 h-auto flex flex-col justify-start items-start space-y-2"
@@ -63,7 +72,16 @@
                             type="text"
                             class="w-full h-10 rounded-xl border border-black px-2 text-sm"
                         />
-                        <p class="text-black text-sm">მხოლოდ ციფრები</p>
+                        <p
+                            :class="[
+                                ' text-sm',
+                                formErrors.zip_code
+                                    ? 'text-red-500'
+                                    : 'text-black',
+                            ]"
+                        >
+                            მხოლოდ ციფრები
+                        </p>
                     </div>
                 </div>
                 <div
@@ -72,11 +90,18 @@
                     <div
                         class="w-1/2 h-auto flex flex-col justify-start items-start space-y-2"
                     >
-                        <p class="text-sm text-black">რეგიონი *</p>
+                        <p
+                            :class="[
+                                ' text-sm',
+                                formErrors.region_id
+                                    ? 'text-red-500'
+                                    : 'text-black',
+                            ]"
+                        >
+                            რეგიონი *
+                        </p>
                         <select
                             v-model="apartmentStore.region_id"
-                            name=""
-                            id=""
                             class="w-full h-10 rounded-xl border border-black px-2"
                         >
                             <option
@@ -91,14 +116,23 @@
                     <div
                         class="w-1/2 h-auto flex flex-col justify-start items-start space-y-2"
                     >
-                        <p class="text-sm text-black">ქალაქი *</p>
+                        <p
+                            :class="[
+                                ' text-sm',
+                                formErrors.city_id
+                                    ? 'text-red-500'
+                                    : 'text-black',
+                            ]"
+                        >
+                            ქალაქი *
+                        </p>
                         <select
                             v-model="apartmentStore.city_id"
                             name="city_id"
                             class="w-full h-10 rounded-xl border border-black px-2"
                         >
                             <option
-                                v-for="city in cities"
+                                v-for="city in filteredCities"
                                 :key="city.id"
                                 :value="city.id"
                             >
@@ -124,7 +158,16 @@
                             type="number"
                             class="w-full h-10 rounded-xl border border-black px-2 text-sm"
                         />
-                        <p class="text-black text-sm">მხოლოდ ციფრები</p>
+                        <p
+                            :class="[
+                                ' text-sm',
+                                formErrors.price
+                                    ? 'text-red-500'
+                                    : 'text-black',
+                            ]"
+                        >
+                            მხოლოდ ციფრები
+                        </p>
                     </div>
                     <div
                         class="w-1/2 h-auto flex flex-col justify-start items-start space-y-2"
@@ -135,7 +178,14 @@
                             type="number"
                             class="w-full h-10 rounded-xl border border-black px-2 text-sm"
                         />
-                        <p class="text-black text-sm">მხოლოდ ციფრები</p>
+                        <p
+                            :class="[
+                                ' text-sm',
+                                formErrors.area ? 'text-red-500' : 'text-black',
+                            ]"
+                        >
+                            მხოლოდ ციფრები
+                        </p>
                     </div>
                 </div>
                 <div
@@ -152,7 +202,16 @@
                             type="number"
                             class="w-full h-10 rounded-xl border border-black px-2 text-sm"
                         />
-                        <p class="text-black text-sm">მხოლოდ ციფრები</p>
+                        <p
+                            :class="[
+                                ' text-sm',
+                                formErrors.bedrooms
+                                    ? 'text-red-500'
+                                    : 'text-black',
+                            ]"
+                        >
+                            მხოლოდ ციფრები
+                        </p>
                     </div>
                 </div>
                 <div
@@ -163,12 +222,26 @@
                         v-model="apartmentStore.description"
                         class="w-full h-[135px] border border-black rounded-xl"
                     ></textarea>
-                    <p class="text-sm text-black">მინიმუმ 5 სიტყვა</p>
+                    <p
+                        :class="[
+                            ' text-sm',
+                            formErrors.address ? 'text-red-500' : 'text-black',
+                        ]"
+                    >
+                        მინიმუმ 5 სიტყვა
+                    </p>
                 </div>
                 <div
                     class="w-full h-auto flex flex-col justify-start items-start space-y-3"
                 >
-                    <p class="text-black">ატვირთეთ ფოტო *</p>
+                    <p
+                        :class="[
+                            ' text-sm',
+                            formErrors.image ? 'text-red-500' : 'text-black',
+                        ]"
+                    >
+                        ატვირთეთ ფოტო *
+                    </p>
                     <div
                         class="w-full h-[135px] border border-black border-dashed flex justify-center items-center rounded-xl relative"
                     >
@@ -192,7 +265,16 @@
                         <div
                             class="w-1/2 h-auto flex flex-col justify-start items-start space-y-2"
                         >
-                            <p class="text-sm text-black">აირჩიეთ *</p>
+                            <p
+                                :class="[
+                                    ' text-sm',
+                                    formErrors.address
+                                        ? 'text-red-500'
+                                        : 'text-black',
+                                ]"
+                            >
+                                აირჩიეთ *
+                            </p>
                             <select
                                 v-model="apartmentStore.agent_id"
                                 name=""
@@ -215,7 +297,11 @@
                 class="mt-10 w-full flex justify-end items-center h-auto space-x-4"
             >
                 <Button title="გაუქმება" type="outline" />
-                <Button @click="submit" title="დაამატე ლისტინგი" />
+                <Button
+                    :disabled="submitDisabled"
+                    @click="submit"
+                    title="დაამატე ლისტინგი"
+                />
             </div>
         </div>
     </div>
@@ -227,23 +313,24 @@ import Button from '@/components/Button.vue'
 import Icon from '@/components/Icon.vue'
 import useApartmentStore from '@/store/apartment.js'
 import axios from '@/plugins/axios'
-import { onMounted, reactive, ref, watch } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 
 const apartmentStore = useApartmentStore()
 
 const regions = ref([])
 const cities = ref([])
+const filteredCities = ref([])
 const agents = ref([])
 const formErrors = reactive({
-    address: '',
+    address: 'მინიმუმ 2 სიმბოლო',
     is_rental: '',
-    zip_code: '',
-    region_id: '',
-    city_id: '',
-    description: '',
-    price: '',
-    area: '',
-    bedrooms: '',
+    zip_code: 'მხოლოდ ციფრები',
+    region_id: 'required',
+    city_id: 'required',
+    description: 'მინიმუმ 5 სიტყვა',
+    price: 'მხოლოდ ციფრები',
+    area: 'მხოლოდ ციფრები',
+    bedrooms: 'მხოლოდ ციფრები',
     image: 'required',
 })
 
@@ -268,6 +355,27 @@ watch(
 )
 
 watch(
+    () => apartmentStore.region_id,
+    () => {
+        if (apartmentStore.region_id) {
+            formErrors.region_id = ''
+        }
+        filteredCities.value = cities.value.filter(
+            (city) => city.region_id === apartmentStore.region_id
+        )
+    }
+)
+
+watch(
+    () => apartmentStore.city_id,
+    () => {
+        if (apartmentStore.city_id) {
+            formErrors.city_id = ''
+        }
+    }
+)
+
+watch(
     () => apartmentStore.zip_code,
     () => {
         apartmentStore.zip_code = apartmentStore.zip_code.replace(/\D/g, '')
@@ -275,6 +383,33 @@ watch(
             formErrors.zip_code = ''
         } else {
             formErrors.zip_code = 'სავალდებულო'
+        }
+    }
+)
+
+watch(
+    () => apartmentStore.area,
+    () => {
+        if (apartmentStore.area) {
+            formErrors.area = ''
+        }
+    }
+)
+
+watch(
+    () => apartmentStore.bedrooms,
+    () => {
+        if (apartmentStore.bedrooms) {
+            formErrors.bedrooms = ''
+        }
+    }
+)
+
+watch(
+    () => apartmentStore.price,
+    () => {
+        if (apartmentStore.price) {
+            formErrors.price = ''
         }
     }
 )
@@ -300,7 +435,43 @@ const handleImageUpload = (e) => {
     formErrors.image = ''
 }
 
-const submit = () => {
-    console.log('submiit')
+const isEmpty = (value) => {
+    return (
+        value === null ||
+        value === undefined ||
+        value === '' ||
+        (Array.isArray(value) && value.length === 0)
+    )
+}
+
+const checkIfAllEmpty = (obj) => {
+    return Object.values(obj).every(isEmpty)
+}
+
+const submitDisabled = computed(() => {
+    if (!checkIfAllEmpty(formErrors)) {
+        return true
+    } else {
+        return false
+    }
+})
+
+const submit = async () => {
+    if (checkIfAllEmpty(formErrors)) {
+        const formData = new FormData()
+        formData.append('address', apartmentStore.address)
+        formData.append('zip_code', apartmentStore.zip_code)
+        formData.append('is_rental', apartmentStore.is_rental)
+        formData.append('agent_id', apartmentStore.agent_id)
+        formData.append('region_id', apartmentStore.region_id)
+        formData.append('city_id', apartmentStore.city_id)
+        formData.append('description', apartmentStore.description)
+        formData.append('price', apartmentStore.price)
+        formData.append('area', apartmentStore.area)
+        formData.append('bedrooms', apartmentStore.bedrooms)
+        formData.append('image', apartmentStore.image)
+
+        await axios.post('/real-estates', formData)
+    }
 }
 </script>
