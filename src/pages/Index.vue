@@ -71,7 +71,7 @@
     </div>
     <div class="w-full h-auto px-40 grid grid-cols-4 gap-5 pb-16 mt-8">
         <Card
-            v-for="apartment in apartments"
+            v-for="apartment in filteredApartments"
             :key="apartment.id"
             :apartment="apartment"
         />
@@ -86,7 +86,7 @@ import Filters from '@/components/Filters.vue'
 import AgentModal from '@/components/AgentModal.vue'
 import useUiStore from '@/store/ui'
 import useFilterStore from '@/store/filters'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import axios from '@/plugins/axios'
 
 const uiStore = useUiStore()
@@ -105,8 +105,41 @@ const isFiltering = computed(() => {
     ) {
         return true
     } else {
-        false
+        return false
     }
+})
+
+const filteredApartments = computed(() => {
+    return apartments.value.filter((apartment) => {
+        // Determine if a filter is set for stricter matching
+        const isRegionSet = filterStore.region.id !== null
+        const isAreaSet =
+            filterStore.area.min !== null || filterStore.area.max !== null
+        const isPriceSet =
+            filterStore.price.min !== null || filterStore.price.max !== null
+        const isBedroomsSet = filterStore.bedrooms !== null
+
+        // If at least one filter is set, apply all active filters
+        const matchRegion =
+            !isRegionSet || apartment.city.region.id === filterStore.region.id
+        const matchArea =
+            !isAreaSet ||
+            ((!filterStore.area.min ||
+                apartment.area >= filterStore.area.min) &&
+                (!filterStore.area.max ||
+                    apartment.area <= filterStore.area.max))
+        const matchPrice =
+            !isPriceSet ||
+            ((!filterStore.price.min ||
+                apartment.price >= filterStore.price.min) &&
+                (!filterStore.price.max ||
+                    apartment.price <= filterStore.price.max))
+        const matchBedrooms =
+            !isBedroomsSet || apartment.bedrooms === filterStore.bedrooms
+
+        // Return true only if all filters that are set match
+        return matchRegion && matchArea && matchPrice && matchBedrooms
+    })
 })
 
 onMounted(async () => {
