@@ -1,6 +1,7 @@
 <template>
-    <component :is="icon" :class="[size, color]" />
+    <component :is="icon" :class="[size, color, extraClass]" />
 </template>
+
 <script setup>
 import { defineAsyncComponent } from 'vue'
 const props = defineProps({
@@ -15,6 +16,10 @@ const props = defineProps({
     color: {
         type: String,
         default: undefined,
+    },
+    extraClass: {
+        type: Array,
+        default: [],
     },
 })
 const icon = defineAsyncComponent(() =>
