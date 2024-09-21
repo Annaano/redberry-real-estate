@@ -1,6 +1,6 @@
 <template>
     <Header />
-    <div class="w-full h-auto flex justify-center items-center mt-16">
+    <div class="w-full h-auto flex justify-center items-center py-16">
         <div class="w-1/2 h-auto flex flex-col justify-start items-start">
             <div class="w-full h-10 flex justify-center items-center">
                 <p class="text-black font-medium text-3xl">
@@ -185,12 +185,19 @@
                     </div>
                 </div>
             </div>
+            <div
+                class="mt-10 w-full flex justify-end items-center h-auto space-x-4"
+            >
+                <Button title="გაუქმება" type="outline" />
+                <Button title="დაამატე ლისტინგი" />
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
 import Header from '@/components/Header.vue'
+import Button from '@/components/Button.vue'
 import Icon from '@/components/Icon.vue'
 import useApartmentStore from '@/store/apartment.js'
 const apartmentStore = useApartmentStore()
