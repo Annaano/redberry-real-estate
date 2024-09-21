@@ -471,7 +471,12 @@ const submit = async () => {
         formData.append('bedrooms', apartmentStore.bedrooms)
         formData.append('image', apartmentStore.image)
 
-        await axios.post('/real-estates', formData)
+        const result = await axios.post('/real-estates', formData)
+
+        if (result.status == 201) {
+            localStorage.removeItem('apartment')
+            window.location.href = '/'
+        }
     }
 }
 </script>

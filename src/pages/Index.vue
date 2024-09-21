@@ -1,13 +1,50 @@
 <template>
     <Header />
     <AgentModal :isOpen="uiStore.agentModalOpen" />
+    <div
+        :class="[
+            'h-16 bg-primary fixed right-0 top-20 flex justify-start items-center rounded-l-lg cursor-pointer duration-150 shadow-2xl',
+            infoIsOpen ? 'w-96' : 'w-16',
+        ]"
+    >
+        <div
+            @click="infoIsOpen = true"
+            :class="[
+                'flex justify-center items-center',
+                infoIsOpen ? 'w-16 h-full' : 'w-full h-full',
+            ]"
+        >
+            <Icon icon="info" color="text-white" size="size-6" />
+        </div>
+        <div
+            :class="[
+                'h-full flex justify-center items-center  bg-white',
+                infoIsOpen ? 'w-full px-4' : 'w-0',
+            ]"
+        >
+            <p v-if="infoIsOpen" class="text-primary text-sm">
+                I know it is not best work but its all i can do :D
+            </p>
+        </div>
+        <Icon
+            v-if="infoIsOpen"
+            @click="infoIsOpen = false"
+            icon="close"
+            size="size-5"
+            color="text-black absolute right-1 top-1"
+        />
+    </div>
     <div class="w-full h-12 mb-4 px-40 mt-8">
         <div class="w-full h-full flex justify-between items-center">
             <Filters />
             <div
                 class="w-auto h-auto flex justify-center items-center space-x-4"
             >
-                <Button title="ლისტინგის დამატება" icon="plus" />
+                <Button
+                    @click="router.push('/add-listing')"
+                    title="ლისტინგის დამატება"
+                    icon="plus"
+                />
                 <Button
                     @click="uiStore.openAgentModal"
                     title="აგენტის დამატება"
@@ -88,10 +125,13 @@ import useUiStore from '@/store/ui'
 import useFilterStore from '@/store/filters'
 import { computed, onMounted, ref, watch } from 'vue'
 import axios from '@/plugins/axios'
+import { useRouter } from 'vue-router'
 
 const uiStore = useUiStore()
 const filterStore = useFilterStore()
 const apartments = ref([])
+const router = useRouter()
+const infoIsOpen = ref(false)
 
 const isFiltering = computed(() => {
     if (

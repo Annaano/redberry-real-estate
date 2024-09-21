@@ -187,6 +187,7 @@ import Button from '@/components/Button.vue'
 import useAgentStore from '@/store/agent'
 import { computed, reactive, watch } from 'vue'
 import axios from '@/plugins/axios'
+import { useRouter } from 'vue-router'
 
 defineProps({
     isOpen: {
@@ -197,6 +198,7 @@ defineProps({
 
 const uiStore = useUiStore()
 const agentStore = useAgentStore()
+const router = useRouter()
 
 const formErrors = reactive({
     name: 'მინიმუმ 2 სიმბოლო',
@@ -290,7 +292,11 @@ const submit = async () => {
         formData.append('phone', agentStore.phone)
         formData.append('email', agentStore.email)
 
-        await axios.post('/agents', formData)
+        const result = await axios.post('/agents', formData)
+
+        if (result.status == 201) {
+            window.location.reload()
+        }
     }
 }
 </script>
