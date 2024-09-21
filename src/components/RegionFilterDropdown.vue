@@ -13,11 +13,11 @@
                 class="col-span-1 flex justify-start items-center space-x-3"
             >
                 <input
-                    type="checkbox"
-                    :value="region.id"
+                    type="radio"
+                    :value="region"
                     :name="`region-${region.id}`"
                     :id="`region-${region.id}`"
-                    v-model="checkedRegions"
+                    v-model="checkedRegion"
                 />
                 <label
                     :for="`region-${region.id}`"
@@ -27,7 +27,11 @@
             </span>
         </div>
         <div class="w-full mt-4 flex justify-end items-center">
-            <Button title="არჩევა" @click="emit('selection', checkedRegions)" />
+            <Button
+                :disabled="checkedRegion == null"
+                title="არჩევა"
+                @click="clickHandler"
+            />
         </div>
     </div>
 </template>
@@ -36,11 +40,13 @@
 import Button from '@/components/Button.vue'
 import axios from '@/plugins/axios'
 import { onMounted, ref } from 'vue'
+import useFiltersStore from '@/store/filters'
 
-const emit = defineEmits(['selection'])
+const emits = defineEmits(['close'])
+const filtersStore = useFiltersStore()
 
 const regions = ref([])
-const checkedRegions = ref([])
+const checkedRegion = ref()
 
 defineProps({
     isOpen: {
@@ -53,4 +59,10 @@ onMounted(async () => {
     const data = await axios.get('/regions')
     regions.value = data.data
 })
+
+const clickHandler = () => {
+    emits('close')
+    filtersStore.region.id = checkedRegion.value.id
+    filtersStore.region.name = checkedRegion.value.name
+}
 </script>

@@ -7,16 +7,35 @@
     >
         <p class="text-black font-medium">საძინებლების რაოდენობა</p>
         <input
+            v-model="bedrooms"
             type="number"
             class="w-1/5 h-10 rounded-lg px-2 outline-none border border-black bg-transparent mt-2"
         />
+        <div class="w-full h-auto mt-6 flex justify-end items-center">
+            <Button @click="clickHandler" title="არჩევა" />
+        </div>
     </div>
 </template>
+
 <script setup>
+import Button from '@/components/Button.vue'
+import useFilterStore from '@/store/filters'
+import { ref } from 'vue'
+
+const filterStore = useFilterStore()
+const bedrooms = ref(0)
+
+const emits = defineEmits(['close'])
+
 defineProps({
     isOpen: {
         type: Boolean,
         required: true,
     },
 })
+
+const clickHandler = () => {
+    emits('close')
+    filterStore.bedrooms = bedrooms.value
+}
 </script>

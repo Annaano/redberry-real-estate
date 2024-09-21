@@ -24,7 +24,7 @@
                 />
             </div>
             <RegionFilterDropdown
-                @selection="filterWithRegion"
+                @close="regionDropdown = false"
                 :isOpen="regionDropdown"
             />
         </div>
@@ -46,7 +46,10 @@
                     ]"
                 />
             </div>
-            <PriceFilterDropdown :isOpen="priceDropdown" />
+            <PriceFilterDropdown
+                @close="priceDropdown = false"
+                :isOpen="priceDropdown"
+            />
         </div>
         <div
             :class="[
@@ -69,7 +72,10 @@
                     ]"
                 />
             </div>
-            <AreaFilterDropDown :is-open="areaDropdown" />
+            <AreaFilterDropDown
+                @close="areaDropdown = false"
+                :is-open="areaDropdown"
+            />
         </div>
         <div
             :class="[
@@ -93,7 +99,10 @@
                 />
             </div>
 
-            <BedroomFilterDropdown :is-open="bedroomsDropdown" />
+            <BedroomFilterDropdown
+                @close="bedroomsDropdown = false"
+                :is-open="bedroomsDropdown"
+            />
         </div>
     </div>
 </template>
