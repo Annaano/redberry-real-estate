@@ -1,7 +1,12 @@
 <template>
     <Header />
     <div class="w-full h-auto flex justify-start items-center px-40 mt-8">
-        <Icon icon="back-arrow" size="size-8" color="text-black" />
+        <Icon
+            @click="router.push('/')"
+            icon="back-arrow"
+            size="size-8"
+            color="text-black cursor-pointer"
+        />
     </div>
     <div class="w-full h-[714px] px-40 flex justify-center items-center mt-8">
         <div class="w-full h-full flex justify-center items-center gap-16">
@@ -112,11 +117,12 @@ import Icon from '@/components/Icon.vue'
 import AgentCard from '@/components/AgentCard.vue'
 import Button from '@/components/Button.vue'
 import CardSlider from '@/components/CardSlider.vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { onMounted, ref } from 'vue'
 import axios from '@/plugins/axios'
 
 const route = useRoute()
+const router = useRouter()
 const apartment = ref()
 const sameLocationApartments = ref([])
 
