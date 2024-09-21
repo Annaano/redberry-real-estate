@@ -3,6 +3,7 @@
         :class="[
             'w-auto h-10 px-[10px] gap-2 rounded-xl flex justify-center items-center text-sm',
             buttonColor,
+            disabled && 'cursor-not-allowed',
         ]"
         :disabled="disabled"
     >
@@ -14,6 +15,7 @@
 <script setup>
 import Icon from '@/components/Icon.vue'
 import { computed } from 'vue'
+
 const props = defineProps({
     title: {
         type: String,
@@ -41,6 +43,7 @@ const props = defineProps({
         default: '',
     },
 })
+
 const buttonColor = computed(() => {
     switch (props.color) {
         case 'primary':
@@ -57,6 +60,7 @@ const buttonColor = computed(() => {
                 : 'bg-primary hover:bg-primary-darker duration-150 text-white'
     }
 })
+
 const iconColor = computed(() => {
     switch (props.color) {
         case 'primary':
